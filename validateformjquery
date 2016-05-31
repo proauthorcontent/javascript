@@ -1,5 +1,3 @@
-/* CTEC 126*/
-
 $(document).ready(function(){
 
 	// hide all errors if they are being shown
