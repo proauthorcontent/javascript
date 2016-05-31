@@ -1,7 +1,4 @@
-/* CTEC 126
-   Homework 9
-   May 2015
-*/
+/* CTEC 126*/
 
 $(document).ready(function(){
 
