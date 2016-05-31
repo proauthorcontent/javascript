@@ -1,0 +1,170 @@
+/* CTEC 126
+   Homework 9
+   May 2015
+*/
+
+$(document).ready(function(){
+
+	// hide all errors if they are being shown
+	$('.error').hide();
+
+	// init vars
+	var value = "";
+
+	var errorFirst = false;
+	var errorLast = false;
+	var errorAddress = false;
+	var errorState = false;
+	var errorProduct = false;
+	var errorQuantity = false;
+	var errorTerms = false;
+
+	var preventSubmit = true;
+
+	// first name
+	// on blur check the value
+	$(':input#first').blur(function(){
+			value = $(this).val();
+			if (value == "") {
+				$(this).addClass('error');
+				$('#firsterror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#firsterror').hide();
+			} // end if
+	});//end each
+
+	// last name
+	$(':input#last').blur(function(){
+			value = $(this).val();
+			if (value == "") {
+				$(this).addClass('error');
+				$('#lasterror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#lasterror').hide();
+			} // end  if
+	});//end each
+
+	// address
+	$(':input#address').blur(function(){
+			value = $(this).val();
+			if (value == "") {
+				$(this).addClass('error');
+				$('#addresserror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#addresserror').hide();
+			} // end  if
+	});//end each
+
+	// state
+	$(':input#state').blur(function(){
+			value = $(this).val();
+			if (value == "") {
+				$(this).addClass('error');
+				$('#stateerror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#stateerror').hide();
+			} // end  if
+	});//end each
+
+	// product
+	$(':input#product').blur(function(){
+			value = $(this).val();
+			if (value == "") {
+				$(this).addClass('error');
+				$('#producterror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#producterror').hide();
+			} // end  if
+	});//end each
+
+	// quantity
+	$(':input#quantity').blur(function(){
+			value = $(this).val();
+			if ( value == "" || isNaN(value) ) {
+				$(this).addClass('error');
+				$('#quantityerror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#quantityerror').hide();
+			} // end  if
+	});//end each
+
+	// terms
+	$(':input#terms').blur(function(){
+			if ( $(this).prop('checked') == false ) {
+				$(this).addClass('error');
+				$('#termserror').show();
+			} else {
+				$(this).removeClass('error');
+				$('#termserror').hide();
+			} // end  if
+	});//end each
+
+	// handle the submit
+	// function to check data and return bool to preventSubmit
+	function checkData() {
+
+			// Focus through all of the fields to trigger errors
+			$(':input#first').focus();
+			$(':input#last').focus();
+			$(':input#address').focus();
+			$(':input#state').focus();
+			$(':input#product').focus();
+			$(':input#quantity').focus();
+			$(':input#terms').focus();
+			$('#submit').focus();
+
+			// check for errors, if there is one then return true to preventSubmit
+			value = $(':input#first').val();
+			if ( value == "" ){
+				return true;
+			};
+			value = $(':input#last').val();
+			if ( value == "" ) {
+				return true;
+			};
+			value = $(':input#address').val();
+			if ( value == "" ) {
+				return true;
+			};
+			value = $(':input#state').val();
+			if ( value == "" ) {
+				return true;
+			};
+			value = $(':input#product').val();
+			if ( value == "" ) {
+				return true;
+			};
+			value = $(':input#quantity').val();
+			if ( value == "" || isNaN(value) ) {
+				return true;
+			};
+			if ( $(':input#terms').prop('checked') == false ) {
+				return true;
+			};
+	
+	};// end checkData()
+
+	// handle the event of submitting
+	$('#order').submit(function(event){
+
+		// disable submit button
+		$('#submit').prop('disabled',true);
+
+		// gets bool from data check function
+		preventSubmit = checkData();
+
+		if (preventSubmit == true) {
+			event.preventDefault();
+			// re-enable submit button
+			$('#submit').prop('disabled',false);
+		};
+
+	});//end submit
+
+}); // end ready
